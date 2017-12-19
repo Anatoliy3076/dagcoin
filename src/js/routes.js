@@ -470,12 +470,12 @@
         })
         .state('initialRecovery', {
           url: '/initialRecovery',
-          templateUrl: 'views/initialRecovery.html',
+          templateUrl: 'views/recovery.html',
           walletShouldBeComplete: false,
           needProfile: false,
           views: {
             main: {
-              templateUrl: 'views/initialRecovery.html',
+              templateUrl: 'views/recovery.html',
             },
           },
         })
