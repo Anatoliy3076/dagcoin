@@ -294,22 +294,17 @@
               const device = require('byteballcore/device.js');
               const opts = { deviceName: 'RECOVER_FROM_SEED' };
               device.setDeviceName(opts.deviceName);
-              configService.set(opts, (err) => {
-                profileService.create({ noWallet: false }, (err) => {
-                  return $timeout(() => {
+              configService.set(opts, () => {
+                profileService.create({ noWallet: false }, () => $timeout(() => {
                     $rootScope.$emit('Local/InitialRecoveryInProgress');
                     scanForAddressesAndWalletsInLightClient(self.inputMnemonic, cleanAndAddWalletsAndAddresses);
-                  }, 1000);
-                });
+                  }, 1000));
               });
-            }
-            else {
-              if (self.bLight) {
+            } else if (self.bLight) {
                 scanForAddressesAndWalletsInLightClient(self.inputMnemonic, cleanAndAddWalletsAndAddresses);
               } else {
                 scanForAddressesAndWallets(self.inputMnemonic, cleanAndAddWalletsAndAddresses);
               }
-            }
           } else {
             self.error = gettextCatalog.getString('Seed is not valid');
           }

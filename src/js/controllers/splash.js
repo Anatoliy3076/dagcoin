@@ -63,8 +63,7 @@
           }
           if (cb) {
             cb();
-          }
-          else{
+          } else {
             self.step = 'device_name';
             $scope.$apply();
           }
