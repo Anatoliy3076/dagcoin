@@ -38,7 +38,8 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
                 autoRefreshClientService,
                 connectionService,
                 newVersion,
-                ENV) {
+                ENV,
+                moment) {
         const async = require('async');
         const constants = require('byteballcore/constants.js');
         const mutex = require('byteballcore/mutex.js');
@@ -1054,12 +1055,28 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
             $log.debug(`Tx History synced. Total Txs: ${newHistory.length}`);
 
             if (walletId === profileService.focusedClient.credentials.walletId) {
-              self.completeHistory = newHistory;
-              self.txHistory = newHistory;
-              self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
 
-              console.log('wallet transaction history is updated');
-              console.log(self.txHistory);
+              self.txHistory = newHistory;
+              self.visible_rows = 0;
+
+              self.completeHistory = {};
+
+              for (let x = 0, maxLen = self.txHistory.length; x < maxLen; x += 1) {
+                const t = self.txHistory[x];
+                if (!t.isFundingNodeTransaction) {
+                  const timestamp = t.time * 1000;
+                  const date = moment(timestamp).format('DD/MM/YYYY');
+
+                  if (!self.completeHistory[date]) {
+                    self.completeHistory[date] = [];
+                  }
+
+                  self.completeHistory[date].push(t);
+                  self.visible_rows += 1;
+                }
+              }
+
+              self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
               $rootScope.$apply();
             }
 

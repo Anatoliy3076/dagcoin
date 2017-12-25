@@ -1,8 +1,8 @@
 @import "../../../css/variables";
 
 .dag_transactions {
-  padding-top: 0;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 15px 20px;
   position: relative;
 
   .transaction_history_status, .transaction_history_status p {
@@ -35,7 +35,7 @@
     margin: 0;
     font-size: 12px;
     position: absolute;
-    right: 10px;
+    right: 15px;
     top: 15px;
     min-width: 120px;
 

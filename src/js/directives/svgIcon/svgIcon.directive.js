@@ -18,13 +18,13 @@
         name: '@',
         title: '@'
       },
-      link: ($scope, element) => {
+      link: ($scope, element, attr) => {
         /* istanbul ignore next */
         if (!$scope.name && !$scope.title) {
           return false;
         }
 
-        const svgFile = `${$scope.name || $scope.title}.svg`;
+        let svgFile = `${$scope.name || $scope.title}.svg`;
 
         function loadTemplate() {
           const svgPath = isCordova ? `css/svg/${svgFile}` : `/public/css/svg/${svgFile}`;
@@ -44,11 +44,8 @@
           }
         }
 
-        $scope.$watch('name', () => {
-          renderSVG();
-        });
-
-        $scope.$watch('title', () => {
+        $scope.$watch(() => attr.name, (newValue) => {
+          svgFile = `${newValue}.svg`;
           renderSVG();
         });
 

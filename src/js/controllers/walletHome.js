@@ -28,7 +28,9 @@
                 isMobile,
                 fundingExchangeClientService,
                 ENV,
-                migrationService) {
+                migrationService,
+                moment,
+                $interval) {
         migrationService.migrate();
         const constants = require('byteballcore/constants.js');
         const eventBus = require('byteballcore/event_bus.js');
@@ -147,6 +149,42 @@
         // const accept_msg = gettextCatalog.getString('Accept');
         // const cancel_msg = gettextCatalog.getString('Cancel');
         // const confirm_msg = gettextCatalog.getString('Confirm');
+
+        $scope.formatSum = (sum) => {
+          const string = sum.toString().split('.');
+
+          if (!string[1]) {
+            return `${sum}.00`;
+          }
+
+          if (string[1] && string[1].length === 1) {
+            return `${sum}0`;
+          }
+          return sum;
+        };
+
+        const today = moment().format('DD/MM/YYYY');
+        const yesterday = moment().subtract(1, 'day').format('DD/MM/YYYY');
+
+        $scope.formatDate = (value) => {
+          if (value === today) {
+            return 'Today';
+          } else if (value === yesterday) {
+            return 'Yesterday';
+          }
+          return value;
+        };
+
+        $scope.transactionStatus = (transaction) => {
+          if (!transaction.confirmations) {
+            return { icon: 'autorenew', title: gettextCatalog.getString('Pending') };
+          }
+
+          if (transaction.action === 'received') {
+            return { icon: 'call_received', title: gettextCatalog.getString('Received') };
+          }
+          return { icon: 'call_made', title: gettextCatalog.getString('Sent') };
+        };
 
         $scope.openDestinationAddressModal = function (wallets, address) {
           $rootScope.modalOpened = true;
