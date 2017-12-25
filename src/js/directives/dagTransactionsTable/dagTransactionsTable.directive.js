@@ -9,9 +9,9 @@
     .module('copayApp.directives')
     .directive('dagTransactionsTable', dagTransactionsTable);
 
-  dagTransactionsTable.$inject = ['moment', 'exportTransactions', 'isCordova', '$timeout', '$rootScope', 'gettextCatalog', '$q'];
+  dagTransactionsTable.$inject = ['moment', 'exportTransactions', 'isCordova', '$timeout', '$rootScope', 'gettextCatalog', '$q', 'profileService'];
 
-  function dagTransactionsTable(moment, exportTransactions, isCordova, $timeout, $rootScope, gettextCatalog, $q) {
+  function dagTransactionsTable(moment, exportTransactions, isCordova, $timeout, $rootScope, gettextCatalog, $q, profileService) {
     return {
       restrict: 'E',
       replace: true,
@@ -22,6 +22,8 @@
       link: ($scope) => {
         const today = moment().format('DD/MM/YYYY');
         const yesterday = moment().subtract(1, 'day').format('DD/MM/YYYY');
+        const fc = profileService.focusedClient;
+        $scope.walletId = fc.credentials.walletId;
         $scope.loading = true;
         $scope.isCordova = isCordova;
         $scope.transactions = {};
@@ -108,7 +110,6 @@
               $scope.loading = false;
             });
           } else {
-            $scope.total_transactions = 0;
             $scope.loading = false;
           }
         });

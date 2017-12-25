@@ -1008,15 +1008,11 @@
                           }
                         }
                       } else {
+                        indexScope.updateTxHistory();
                         $rootScope.$emit('Local/SetTab', 'walletHome');
-
                         $timeout(() => {
-                          indexScope.updateTxHistory();
-
-                          $timeout(() => {
-                            self.openTxModal(indexScope.txHistory[0], indexScope.txHistory);
-                          }, 1000);
-                        }, 1000);
+                          self.openTxModal(indexScope.txHistory[0], indexScope.txHistory);
+                        }, 1500);
                       }
                       resolve();
                     });
