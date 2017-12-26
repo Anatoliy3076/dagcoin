@@ -30,7 +30,7 @@
                 ENV,
                 migrationService,
                 moment,
-                $interval) {
+                exportTransactions) {
         migrationService.migrate();
         const constants = require('byteballcore/constants.js');
         const eventBus = require('byteballcore/event_bus.js');
@@ -407,6 +407,10 @@
             const m = angular.element(document.getElementsByClassName('reveal-modal'));
             m.addClass(animationService.modalAnimated.slideOutDown);
           });
+        };
+
+        this.exportTransactions = () => {
+          exportTransactions.toCSV()
         };
 
         this.openTxpModal = function () {

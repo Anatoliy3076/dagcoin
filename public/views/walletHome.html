@@ -140,7 +140,7 @@
               <!-- EXPORT TO CVS: START -->
               <div ng-if="!isCordova">
                 <input id="export_file" type="file" nwsaveas="Dagcoin.csv" accept=".csv" style="display:none">
-                <button ng-disabled="exporting" class="transactions_export_button btn btn_red" ng-click="exportToCsv()">
+                <button ng-disabled="exporting" class="transactions_export_button btn btn_red" ng-click="home.exportTransactions();">
                   <svg-icon name="content_copy"></svg-icon>
                   <span translate>Export To CSV</span>
                 </button>
