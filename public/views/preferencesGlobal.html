@@ -2,30 +2,36 @@
 
 <div class="content preferences" ng-controller="preferencesGlobalController as prefGlobal" ng-init="prefGlobal.init()">
 
-    <h4 translate>GENERAL</h4>
-    <ul>
-        <li ui-sref="system" dag-left-icon="globe" dag-right-icon="chevron-thin-right">
-            <div translate>System</div>
-            <div class="description" translate>Setup your wallets.</div>
-        </li>
+<!--  <div class="dag_tip p20 no_icon backup_error">
+    <h4 class="ng-binding">Wallet Backup</h4>
+    <p class="ng-binding">For security reasons we strongly recommend you to back your wallet seed up as soon as possible.</p>
+    <a href="#/backup?backTo=preferencesGlobal">Proceed</a>
+  </div>-->
 
-        <li ui-sref="security" dag-left-icon="shield" dag-right-icon="chevron-thin-right">
-            <div translate>Security</div>
-            <div class="description" translate>Backup your wallets and configure restrictions.</div>
-        </li>
-    </ul>
+  <h4 translate>GENERAL</h4>
+  <ul>
+    <li ui-sref="system" dag-left-icon="globe" dag-right-icon="chevron-thin-right">
+      <div translate>System</div>
+      <div class="description" translate>Setup your wallets.</div>
+    </li>
+
+    <li ui-sref="security" dag-left-icon="shield" dag-right-icon="chevron-thin-right">
+      <div translate>Security</div>
+      <div class="description" translate>Backup your wallets and configure restrictions.</div>
+    </li>
+  </ul>
 
 
-    <h4 translate>Other</h4>
-    <ul>
-        <li ui-sref="aboutDevice" dag-left-icon="devices_other" dag-right-icon="chevron-thin-right">
-            <div translate>About Device</div>
-            <div class="description" translate>Information about device in use.</div>
-        </li>
-        <li ui-sref="about" dag-left-icon="info" dag-right-icon="chevron-thin-right">
-            <div translate>About Dagcoin</div>
-            <div class="description" translate>Information about changes and app in general.</div>
-        </li>
-    </ul>
+  <h4 translate>Other</h4>
+  <ul>
+    <li ui-sref="aboutDevice" dag-left-icon="devices_other" dag-right-icon="chevron-thin-right">
+      <div translate>About Device</div>
+      <div class="description" translate>Information about device in use.</div>
+    </li>
+    <li ui-sref="about" dag-left-icon="info" dag-right-icon="chevron-thin-right">
+      <div translate>About Dagcoin</div>
+      <div class="description" translate>Information about changes and app in general.</div>
+    </li>
+  </ul>
 
 </div>

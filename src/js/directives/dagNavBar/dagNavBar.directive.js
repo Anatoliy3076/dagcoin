@@ -10,9 +10,9 @@
     .module('copayApp.directives')
     .directive('dagNavBar', dagNavBar);
 
-  dagNavBar.$inject = ['$state', '$rootScope'];
+  dagNavBar.$inject = ['$state', '$rootScope', '$stateParams'];
 
-  function dagNavBar($state, $rootScope) {
+  function dagNavBar($state, $rootScope, $stateParams) {
     return {
       restrict: 'E',
       templateUrl: 'directives/dagNavBar/dagNavBar.template.html',
