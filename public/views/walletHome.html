@@ -155,7 +155,7 @@
                 <table>
                   <tbody>
                   <tr ng-repeat="transaction in data.rows track by $index"
-                      class="transaction_status_{{transaction.action}}" ng-click="openTransaction(transaction)">
+                      class="transaction_status_{{transaction.action}}" ng-click="home.openTxModal(transaction, index.txHistory)">
                     <td class="transaction_status">
                       <svg-icon class="transaction_status_icon" ng-class="{'animation_rotate' : !transaction.confirmations}"
                                 name="{{transactionStatus(transaction).icon}}"></svg-icon>
