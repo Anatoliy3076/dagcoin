@@ -135,6 +135,8 @@ module.exports = function (grunt) {
 
         processors: [
           require('pixrem')(), // add fallbacks for rem units
+          require('postcss-merge-idents')(),
+          require('postcss-clean')(),
           require('autoprefixer')({
             browsers: 'last 4 versions'
           }),
@@ -487,7 +489,7 @@ module.exports = function (grunt) {
       },
       sass: {
         files: ['src/css/**/*.scss', 'src/css/icons.css'],
-        tasks: ['sass', 'concat:css']
+        tasks: ['sass', 'concat:css', 'postcss']
       },
       components: {
         files: ['src/js/**/*.scss'],
