@@ -1072,9 +1072,9 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
                   }
 
                   if (t.action === 'received') {
-                    self.completeHistory[date].balance += (t.amount/1000000);
+                    self.completeHistory[date].balance += (t.amount / 1000000);
                   } else {
-                    self.completeHistory[date].balance -= (t.amount/1000000);
+                    self.completeHistory[date].balance -= (t.amount / 1000000);
                   }
 
                   self.completeHistory[date].rows.push(t);
