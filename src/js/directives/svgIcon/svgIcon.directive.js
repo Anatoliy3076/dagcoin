@@ -45,8 +45,10 @@
         }
 
         $scope.$watch(() => attr.name, (newValue) => {
-          svgFile = `${newValue}.svg`;
-          renderSVG();
+          if (newValue) {
+            svgFile = `${newValue}.svg`;
+            renderSVG();
+          }
         });
 
         return renderSVG();

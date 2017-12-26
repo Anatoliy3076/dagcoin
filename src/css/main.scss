@@ -2972,3 +2972,17 @@ p.color_red {
 .mCSB_inside>.mCSB_container{
   margin-right: 0;
 }
+
+section{
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 1 !important;
+  background-color: #fafafa;
+}
+
+ul {
+  margin-left: 0;
+}

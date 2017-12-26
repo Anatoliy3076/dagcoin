@@ -1,14 +1,6 @@
 dag-spinner {
-  display: table;
-  height: 100%;
-  width: 100%;
-  text-align: center;
+  display: inline-block;
   color: #d52026;
-
-  > div {
-    display: table-cell;
-    vertical-align: middle;
-  }
 
   .loader,
   .loader:after {
@@ -17,8 +9,7 @@ dag-spinner {
     height: 10em;
   }
   .loader {
-    margin: 60px auto;
-    font-size: 10px;
+    font-size: 3px;
     position: relative;
     text-indent: -9999em;
     border-top: 1.1em solid rgba(255, 255, 255, 0.2);

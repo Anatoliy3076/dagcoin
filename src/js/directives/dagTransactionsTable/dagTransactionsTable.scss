@@ -2,7 +2,7 @@
 
 .dag_transactions {
   background: rgba(255, 255, 255, 0.3);
-  padding: 15px 20px;
+  padding: 15px 0;
   position: relative;
 
   .transaction_history_status, .transaction_history_status p {
@@ -16,6 +16,11 @@
     color: #c3c7c9;
     font-size: 12px;
     text-transform: uppercase;
+    background: #FBFBFB;
+    padding: 3px 45px 3px 20px;
+    border-bottom: 1px solid #F1F1F1;
+    border-top: 1px solid #F1F1F1;
+    margin-top: 20px;
   }
 
   dag-spinner{
@@ -27,6 +32,11 @@
 
   .dag_transactions_list_triggers{
     margin-bottom: 10px;
+    padding: 0 20px;
+  }
+
+  .dag_transactions_table{
+    padding: 0 20px;
   }
 
   .transactions_export_button {
@@ -66,6 +76,7 @@
   }
 
   table {
+    margin-bottom: 0;
     tr {
 
       &.transaction_status_pending {

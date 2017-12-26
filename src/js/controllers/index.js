@@ -1064,14 +1064,21 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
               for (let x = 0, maxLen = self.txHistory.length; x < maxLen; x += 1) {
                 const t = self.txHistory[x];
                 if (!t.isFundingNodeTransaction) {
+                  console.log(t);
                   const timestamp = t.time * 1000;
                   const date = moment(timestamp).format('DD/MM/YYYY');
 
                   if (!self.completeHistory[date]) {
-                    self.completeHistory[date] = [];
+                    self.completeHistory[date] = { balance: 0, rows: [] };
                   }
 
-                  self.completeHistory[date].push(t);
+                  if (t.action === 'received') {
+                    self.completeHistory[date].balance += parseFloat(t.amountStr);
+                  } else {
+                    self.completeHistory[date].balance -= parseFloat(t.amountStr);
+                  }
+
+                  self.completeHistory[date].rows.push(t);
                   self.visible_rows += 1;
                 }
               }
