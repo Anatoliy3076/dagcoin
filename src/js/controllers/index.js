@@ -1055,7 +1055,6 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
             $log.debug(`Tx History synced. Total Txs: ${newHistory.length}`);
 
             if (walletId === profileService.focusedClient.credentials.walletId) {
-
               self.txHistory = newHistory;
               self.visible_rows = 0;
 
