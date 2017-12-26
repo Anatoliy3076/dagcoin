@@ -2688,6 +2688,11 @@ canvas {
   top: 0;
   bottom: 50px;
   overflow: auto;
+
+  .svg-container.wallet:nth-child(2){
+    position: fixed;
+    bottom: -150px;
+  }
 }
 
 .tab-in {

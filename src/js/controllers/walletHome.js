@@ -206,13 +206,13 @@
             $scope.color = fc.backgroundColor;
             $scope.bAllowAddressbook = self.canSendExternalPayment();
 
-            $scope.beforeQrCodeScann = function () {
+            $scope.beforeQrCodeScann = () => {
               $scope.error = null;
               $scope.addAddressbookEntry = true;
               $scope.editAddressbook = false;
             };
 
-            $scope.onQrCodeScanned = function (data, addressbookForm) {
+            $scope.onQrCodeScanned = (data, addressbookForm) => {
               $timeout(() => {
                 const form = addressbookForm;
                 if (data && form) {

@@ -109,7 +109,7 @@
         <!--<dag-transactions-table rows="index.txHistory"></dag-transactions-table>-->
 
         <div class="row m20t text-center" ng-show="index.updatingTxHistory[index.walletId]">
-          <div class="columns large-12 medium-12 small-12">
+          <div>
             <dag-spinner></dag-spinner>
           </div>
           <div ng-show="index.txProgress > 6" translate class="size-12 text-gray m20t" style="margin-left: 40px;">
@@ -122,18 +122,17 @@
           </div>
         </div>
 
-        <div class="dag_transactions">
-          <div class="oh text-center" ng-show="!index.txHistory[0] || index.updatingTxHistory[index.walletId]">
-						<span ng-show="index.txHistoryError" ng-click='index.updateTxHistory()'>
-						  <p class="size-12 m10b db text-gray" translate>Could not fetch transaction history</p>
-						  <button class="btn_red-full round light-gray tiny" translate>Tap to retry</button>
-						</span>
-            <span ng-if="!index.txHistoryError" translate>
-						  No transactions yet
-						</span>
-          </div>
 
-          <div ng-show="index.txHistory[0] && !index.updatingTxHistory[index.walletId]" class="dag_transactions_list">
+        <div class="oh text-center p20 text-gray" ng-show="!index.txHistory[0] || index.updatingTxHistory[index.walletId]">
+            <span ng-show="index.txHistoryError" ng-click='index.updateTxHistory()'>
+              <p class="size-12 m10b db" translate>Could not fetch transaction history</p>
+              <button class="btn btn_red-full" translate>Tap to retry</button>
+            </span>
+          <span ng-if="!index.txHistoryError" translate>No transactions yet</span>
+        </div>
+
+        <div class="dag_transactions" ng-show="index.txHistory[0] && !index.updatingTxHistory[index.walletId]">
+          <div class="dag_transactions_list">
             <div class="dag_transactions_list_triggers">
               <h4 translate>Transactions History</h4>
 
@@ -148,16 +147,18 @@
               <!-- EXPORT TO CVS: END -->
             </div>
 
-
             <div ng-repeat="(date, data) in index.completeHistory">
-              <h4 class="transactions_date">{{formatDate(date)}} <span class="right">{{data.balance > 0 ? '+' : ''}}{{formatSum(data.balance)}}</span></h4>
+              <h4 class="transactions_date">{{formatDate(date)}} <span class="right">{{data.balance > 0 ? '+' : ''}}{{formatSum(data.balance)}}</span>
+              </h4>
               <div class="dag_transactions_table">
                 <table>
                   <tbody>
                   <tr ng-repeat="transaction in data.rows track by $index"
-                      class="transaction_status_{{transaction.action}}" ng-click="home.openTxModal(transaction, index.txHistory)">
+                      class="transaction_status_{{transaction.action}}"
+                      ng-click="home.openTxModal(transaction, index.txHistory)">
                     <td class="transaction_status">
-                      <svg-icon class="transaction_status_icon" ng-class="{'animation_rotate' : !transaction.confirmations}"
+                      <svg-icon class="transaction_status_icon"
+                                ng-class="{'animation_rotate' : !transaction.confirmations}"
                                 name="{{transactionStatus(transaction).icon}}"></svg-icon>
                     </td>
                     <td>
@@ -173,7 +174,9 @@
                       </div>
                     </td>
                     <td class="transaction_sum">
-                      <div class="transaction_sum">{{transaction.action === 'received' ? '+' : '-'}}{{formatSum(transaction.amountStr)}}</div>
+                      <div class="transaction_sum">{{transaction.action === 'received' ? '+' :
+                        '-'}}{{formatSum(transaction.amountStr)}}
+                      </div>
                       <div class="transition_date">{{transaction.time * 1000 | amDateFormat:'HH:mm:ss'}}</div>
                     </td>
                     <td class="transaction_expand">
@@ -184,10 +187,12 @@
                 </table>
               </div>
             </div>
+            <div class="page-action">
+              <a href="#" ng-show="index.historyShowShowAll" ng-click="index.showAllHistory()" class="btn btn_red">Show
+                all</a>
+            </div>
           </div>
-          <div class="page-action">
-            <a href="#" ng-show="index.historyShowShowAll" ng-click="index.showAllHistory()" class="btn btn_red">Show all</a>
-          </div>
+
         </div>
 
         <div ng-if="index.txps[0]">
