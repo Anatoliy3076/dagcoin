@@ -182,6 +182,8 @@
 
           if (transaction.action === 'received') {
             return { icon: 'call_received', title: gettextCatalog.getString('Received') };
+          } else if (transaction.action === 'moved') {
+            return { icon: 'code', title: gettextCatalog.getString('Moved') };
           }
           return { icon: 'call_made', title: gettextCatalog.getString('Sent') };
         };
