@@ -139,8 +139,8 @@
 
               <!-- EXPORT TO CVS: START -->
               <div ng-if="!isCordova">
-                <input id="export_file" type="file" nwsaveas="Dagcoin.csv" accept=".csv" style="display:none">
-                <button ng-disabled="exporting" class="transactions_export_button btn btn_red" ng-click="home.exportTransactions();">
+                <input id="export_file" type="file" nwsaveas="Dagcoin-{{index.alias || index.walletName}}.csv" accept=".csv" style="display:none">
+                <button ng-disabled="exporting" class="transactions_export_button btn btn_red" ng-click="index.csvHistory();">
                   <svg-icon name="content_copy"></svg-icon>
                   <span translate>Export To CSV</span>
                 </button>
@@ -149,8 +149,7 @@
             </div>
 
             <div ng-repeat="(date, data) in index.completeHistory">
-              <h4 class="transactions_date">{{formatDate(date)}} <span class="right">{{data.balance > 0 ? '+' : ''}}{{formatSum(data.balance)}}</span>
-              </h4>
+              <h4 class="transactions_date">{{formatDate(date)}}</h4>
               <div class="dag_transactions_table">
                 <table>
                   <tbody>

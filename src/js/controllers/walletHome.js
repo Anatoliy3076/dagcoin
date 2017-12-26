@@ -410,7 +410,7 @@
         };
 
         this.exportTransactions = () => {
-          exportTransactions.toCSV()
+          exportTransactions.toCSV();
         };
 
         this.openTxpModal = function () {
@@ -1018,7 +1018,7 @@
                         $rootScope.$emit('Local/SetTab', 'walletHome');
                         $timeout(() => {
                           self.openTxModal(indexScope.txHistory[0], indexScope.txHistory);
-                        }, 1500);
+                        }, 2000);
                       }
                       resolve();
                     });
