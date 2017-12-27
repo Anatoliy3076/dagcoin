@@ -1684,16 +1684,21 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
 }
 
 .onGoingProcess-content {
-  background: #213140;
   text-align: center;
-  max-width: 16.5rem;
-  max-height: 3.5rem;
-  margin: auto;
+  max-width: 260px;
+  margin: 0 auto;
   color: #fff;
-  padding: 0.5rem;
+  padding: 10px;
   font-size: 13px;
   opacity: 0.8;
   border-radius: 3px;
+  background-color: #222;
+
+  .loader {
+    font-size: 2px;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
 }
 
 /*/////////////////// SPINNER ////////////////////*/
@@ -2982,14 +2987,4 @@ p.color_red {
 
 .mCSB_inside > .mCSB_container {
   margin-right: 0;
-}
-
-.onGoingProcess-content {
-  background-color: #222;
-
-  .loader {
-    font-size: 2px;
-    margin-right: 5px;
-    vertical-align: middle;
-  }
 }
