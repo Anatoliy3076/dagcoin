@@ -411,6 +411,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill, inpu
 .cursor-pointer {
   cursor: pointer;
 }
+
 .last-transactions-content {
   padding: 1.5rem 1rem;
   cursor: pointer;
@@ -1986,11 +1987,11 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
     width: 100px;
   }
 
-  &.error{
+  &.error {
     border-color: $red;
   }
 
-  &.success{
+  &.success {
     border-color: $green;
   }
 }
@@ -2686,7 +2687,7 @@ canvas {
   bottom: 50px;
   overflow: auto;
 
-  .svg-container.wallet:nth-child(2){
+  .svg-container.wallet:nth-child(2) {
     position: fixed;
     bottom: -150px;
   }
@@ -2930,7 +2931,7 @@ section {
   }
 }
 
-.preferences ul.warnings{
+.preferences ul.warnings {
   margin: 20px 0;
   background-color: transparent;
   text-align: center;
@@ -2979,6 +2980,16 @@ p.color_red {
   padding: 3px 0;
 }
 
-.mCSB_inside>.mCSB_container{
+.mCSB_inside > .mCSB_container {
   margin-right: 0;
+}
+
+.onGoingProcess-content {
+  background-color: #222;
+
+  .loader {
+    font-size: 2px;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
 }

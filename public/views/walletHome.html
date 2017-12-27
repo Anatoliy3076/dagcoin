@@ -11,23 +11,16 @@
 </div>
 <div ng-controller="walletHomeController as home">
   <div class="onGoingProcess" ng-show="index.isOffline">
-    <div class="onGoingProcess-content" ng-style="{'background-color':'#222'}">
-      <div class="spinner">
-        <div class="rect1"></div>
-        <div class="rect2"></div>
-        <div class="rect3"></div>
-        <div class="rect4"></div>
-        <div class="rect5"></div>
-      </div>
+    <div class="onGoingProcess-content">
+      <dag-spinner></dag-spinner>
       <span translate>Reconnecting to Wallet Service...</span>
     </div>
   </div>
 
   <div class="onGoingProcess" ng-show="index.anyOnGoingProcess && !index.isOffline">
-    <div class="onGoingProcess-content" ng-style="{'background-color':'#222'}">
+    <div class="onGoingProcess-content">
       <dag-spinner></dag-spinner>
-      <span translate
-            ng-show="['openingWallet', 'updatingStatus', 'updatingBalance', 'updatingPendingTxps'].indexOf(index.onGoingProcessName) >= 0">Updating Wallet...</span>
+      <span translate ng-show="['openingWallet', 'updatingStatus', 'updatingBalance', 'updatingPendingTxps'].indexOf(index.onGoingProcessName) >= 0">Updating Wallet...</span>
       <span translate ng-show="index.onGoingProcessName == 'scanning'">Scanning Wallet funds...</span>
       <span translate ng-show="index.onGoingProcessName == 'recreating'">Recreating Wallet...</span>
       <span translate ng-show="index.onGoingProcessName == 'generatingCSV'">Generating .csv file...</span>
@@ -37,9 +30,9 @@
   </div>
 
   <div class="onGoingProcess" ng-show="home.onGoingProcess && !index.anyOnGoingProces && !index.isOffline">
-    <div class="onGoingProcess-content" ng-style="{'background-color':'#222'}">
+    <div class="onGoingProcess-content">
       <dag-spinner></dag-spinner>
-      {{home.onGoingProcess|translate}}...
+      <span>{{home.onGoingProcess|translate}}...</span>
     </div>
   </div>
 
