@@ -441,7 +441,10 @@
           },
         })
         .state('backup', {
-          url: '/backup/:backTo',
+          url: '/backup',
+          params: {
+            backTo: 'security'
+          },
           templateUrl: 'views/backup.html',
           walletShouldBeComplete: true,
           needProfile: true,
