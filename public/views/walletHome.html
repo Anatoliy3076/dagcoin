@@ -102,7 +102,7 @@
         <!--<dag-transactions-table rows="index.txHistory"></dag-transactions-table>-->
 
         <div class="dag_transactions row m20t text-gray text-center" ng-show="index.updatingTxHistory[index.walletId]">
-          <div>
+          <div class="onGoingProcess-content">
             <dag-spinner></dag-spinner>
           </div>
           <div ng-show="index.txProgress > 6" translate class="size-12 m20t" style="margin-left: 40px;">
