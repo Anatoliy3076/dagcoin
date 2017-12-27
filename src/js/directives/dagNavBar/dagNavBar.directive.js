@@ -25,6 +25,8 @@
       },
       link: ($scope, elem, attr) => {
         $scope.invert = ('invert' in attr);
+        console.log($stateParams);
+        console.log($stateParams.backTo || $scope.goBack);
         $scope.go = () => $state.go($stateParams.backTo || $scope.goBack);
         $scope.openMenu = () => $rootScope.openMenu();
       }
