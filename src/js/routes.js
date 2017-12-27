@@ -442,6 +442,9 @@
         })
         .state('backup', {
           url: '/backup',
+          params: {
+            backTo: 'security'
+          },
           templateUrl: 'views/backup.html',
           walletShouldBeComplete: true,
           needProfile: true,
@@ -453,6 +456,9 @@
         })
         .state('recovery', {
           url: '/recovery',
+          params: {
+            backTo: 'security'
+          },
           templateUrl: 'views/recovery.html',
           walletShouldBeComplete: true,
           needProfile: true,

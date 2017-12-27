@@ -108,7 +108,7 @@ $background: #f5f5f5;
       }
 
       &.left_icon {
-        padding-left: 50px;
+        padding-left: 60px;
       }
 
       &.right_icon {
@@ -119,12 +119,12 @@ $background: #f5f5f5;
         position: absolute;
         left: 20px;
         top: 50%;
-        margin-top: -8px;
+        margin-top: -10px;
         float: none;
 
         svg {
-          width: 16px;
-          height: 16px;
+          width: 24px;
+          height: 24px;
         }
 
         &.svg-icon-chevron-thin-right, &.right {
