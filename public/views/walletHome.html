@@ -17,7 +17,9 @@
     </div>
   </div>
 
-  <div class="onGoingProcess" ng-show="index.anyOnGoingProcess && !index.isOffline">
+  <!-- ng-show="index.anyOnGoingProcess && !index.isOffline" -->
+
+  <div class="onGoingProcess" >
     <div class="onGoingProcess-content">
       <dag-spinner></dag-spinner>
       <span translate ng-show="['openingWallet', 'updatingStatus', 'updatingBalance', 'updatingPendingTxps'].indexOf(index.onGoingProcessName) >= 0">Updating Wallet...</span>
