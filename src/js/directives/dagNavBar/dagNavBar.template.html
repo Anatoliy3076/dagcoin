@@ -1,10 +1,10 @@
 <div class="navbar-container" ng-class="{'invert':invert}">
     <div class="navbar-container-triggers">
-        <span ng-if="goBack" ng-click="go();">
+        <span ng-show="showBack" ng-click="go();">
             <svg-icon name="arrow_back" class="back-button"></svg-icon>
         </span>
 
-        <span ng-click="openMenu()" ng-if="!goBack">
+        <span ng-click="openMenu()" ng-show="!showBack">
             <svg-icon name="menu2"></svg-icon>
         </span>
     </div>

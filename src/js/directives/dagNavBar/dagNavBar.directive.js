@@ -25,8 +25,8 @@
       },
       link: ($scope, elem, attr) => {
         $scope.invert = ('invert' in attr);
-        $scope.goBack = !!$stateParams.backTo;
-        $scope.go = () => $state.go($stateParams.backTo || $scope.goBack);
+        $scope.showBack = (!!$stateParams.backTo || !!$scope.goBack);
+        $scope.go = () => $state.go($stateParams.backTo || $scope.goBack || 'walletHome');
         $scope.openMenu = () => $rootScope.openMenu();
       }
     };
