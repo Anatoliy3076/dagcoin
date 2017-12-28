@@ -1,8 +1,0 @@
-<div class="dag_wallets_carousel">
-    <dag-spinner color="#eee" ng-if="!wallets"></dag-spinner>
-    <ks-swiper-container ng-if="wallets" swiper="swiper" on-ready="onReadySwiper(swiper)" override-parameters="{'centeredSlides':true}" initial-slide="0" loop="false" show-nav-buttons="false" slides-per-view="'auto'" space-between="10">
-        <ks-swiper-slide class="swiper-slide" ng-repeat="wallet in wallets">
-            {{wallet.name}}
-        </ks-swiper-slide>
-    </ks-swiper-container>
-</div>

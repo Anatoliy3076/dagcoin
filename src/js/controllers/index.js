@@ -68,15 +68,6 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
         self.triggerUrl = (state) => {
           $state.go(state);
         };
-        /*
-         console.log("process", process.env);
-         var os = require('os');
-         console.log("os", os);
-         //console.log("os homedir="+os.homedir());
-         console.log("release="+os.release());
-         console.log("hostname="+os.hostname());
-         //console.log(os.userInfo());
-         */
 
         connectionService.init();
         $rootScope.$on('connection:state-changed', (ev, isOnline) => {
@@ -1002,40 +993,11 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
             self.arrMainWalletBalances = self.arrBalances;
           }
 
-          console.group('Balances');
-          console.log(self.arrBalances);
-          console.groupEnd('Balances');
-
           self.dagBalance = _.find(self.arrBalances, { asset: ENV.DAGCOIN_ASSET });
           self.baseBalance = _.find(self.arrBalances, { asset: 'base' });
           console.log(`========= setBalance done, balances: ${JSON.stringify(self.arrBalances)}`);
           breadcrumbs.add(`setBalance done, balances: ${JSON.stringify(self.arrBalances)}`);
 
-          /*
-           // SAT
-           if (self.spendUnconfirmed) {
-           self.totalBalanceBytes = balance.totalAmount;
-           self.lockedBalanceBytes = balance.lockedAmount || 0;
-           self.availableBalanceBytes = balance.availableAmount || 0;
-           self.pendingAmount = null;
-           } else {
-           self.totalBalanceBytes = balance.totalConfirmedAmount;
-           self.lockedBalanceBytes = balance.lockedConfirmedAmount || 0;
-           self.availableBalanceBytes = balance.availableConfirmedAmount || 0;
-           self.pendingAmount = balance.totalAmount - balance.totalConfirmedAmount;
-           }
-
-           //STR
-           self.totalBalanceStr = profileService.formatAmount(self.totalBalanceBytes) + ' ' + self.unitName;
-           self.lockedBalanceStr = profileService.formatAmount(self.lockedBalanceBytes) + ' ' + self.unitName;
-           self.availableBalanceStr = profileService.formatAmount(self.availableBalanceBytes) + ' ' + self.unitName;
-
-           if (self.pendingAmount) {
-           self.pendingAmountStr = profileService.formatAmount(self.pendingAmount) + ' ' + self.unitName;
-           } else {
-           self.pendingAmountStr = null;
-           }
-           */
           $timeout(() => {
             $rootScope.$apply();
           });
@@ -1154,9 +1116,7 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
 
         self.updateLocalTxHistory = function (client, cb) {
           const walletId = client.credentials.walletId;
-          if (self.arrBalances.length === 0) {
-            return console.log('updateLocalTxHistory: no balances yet');
-          }
+          const walletSettings = configService.getSync().wallet.settings;
           breadcrumbs.add(`index: ${self.assetIndex}; balances: ${JSON.stringify(self.arrBalances)}`);
           if (!client.isComplete()) {
             return console.log('fc incomplete yet');
@@ -1174,7 +1134,6 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
               for (let x = 0, maxLen = self.txHistory.length; x < maxLen; x += 1) {
                 const t = self.txHistory[x];
                 if (!t.isFundingNodeTransaction) {
-                  console.log(t);
                   const timestamp = t.time * 1000;
                   const date = moment(timestamp).format('DD/MM/YYYY');
 
@@ -1183,9 +1142,9 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
                   }
 
                   if (t.action === 'received') {
-                    self.completeHistory[date].balance += (t.amount / 1000000);
+                    self.completeHistory[date].balance += (t.amount / walletSettings.dagUnitValue);
                   } else {
-                    self.completeHistory[date].balance -= (t.amount / 1000000);
+                    self.completeHistory[date].balance -= (t.amount / walletSettings.dagUnitValue);
                   }
 
                   self.completeHistory[date].rows.push(t);
@@ -1224,10 +1183,12 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
           $log.debug('Updating Transaction History for walletId', walletId);
           self.txHistoryError = false;
           self.updatingTxHistory = true;
+          self.setOngoingProcess('updatingHistory', true);
 
           $timeout(() => {
             self.updateLocalTxHistory(fc, (err) => {
               self.updatingTxHistory = false;
+              self.setOngoingProcess('updatingHistory', false);
               if (err) {
                 self.txHistoryError = true;
               }
@@ -1242,14 +1203,6 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
           self.updateHistory();
         }, 1000);
 
-//  self.throttledUpdateHistory = lodash.throttle(function() {
-//    self.updateHistory();
-//  }, 5000);
-
-//    self.onMouseDown = function(){
-//        console.log('== mousedown');
-//        self.oldAssetIndex = self.assetIndex;
-//    };
 
         self.onClick = function () {
           console.log('== click');
@@ -1623,6 +1576,7 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
         $rootScope.$on('Local/NewFocusedWallet', () => {
           self.setFocusedWallet();
           self.updatingTxHistory = true;
+          self.setOngoingProcess('updatingHistory', true);
           self.updateTxHistory();
           go.walletHome();
         });
