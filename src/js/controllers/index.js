@@ -1196,7 +1196,7 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
             if (lodash.isFunction(cb)) {
               try {
                 cb(false);
-              } catch (e) {console.error(e)}
+              } catch (e) { console.error(e); }
             }
             return;
           }
@@ -1221,7 +1221,7 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
               if (lodash.isFunction(cb)) {
                 try {
                   cb(lodash.isEmpty(err));
-                } catch (e) {console.error(e)}
+                } catch (e) { console.error(e); }
               }
             });
           });
@@ -1231,7 +1231,7 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
           self.updateHistory();
         }, 1000);
 
-        self.updateTxHistoryPromise = function(cb) {
+        self.updateTxHistoryPromise = function (cb) {
           self.updateHistory(cb);
         };
 
