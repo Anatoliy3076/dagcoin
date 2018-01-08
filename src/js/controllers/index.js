@@ -1231,10 +1231,6 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
           self.updateHistory();
         }, 1000);
 
-        self.updateTxHistoryPromise = function (cb) {
-          self.updateHistory(cb);
-        };
-
         self.onClick = function () {
           console.log('== click');
           self.oldAssetIndex = self.assetIndex;
