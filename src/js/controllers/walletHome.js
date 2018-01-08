@@ -1014,11 +1014,14 @@
                           }
                         }
                       } else {
-                        indexScope.updateTxHistory();
-                        $rootScope.$emit('Local/SetTab', 'walletHome');
-                        $timeout(() => {
-                          self.openTxModal(indexScope.txHistory[0], indexScope.txHistory);
-                        }, 2000);
+                        indexScope.updateTxHistoryPromise((success) => {
+                          if (success) {
+                            $rootScope.$emit('Local/SetTab', 'walletHome');
+                            self.openTxModal(indexScope.txHistory[0], indexScope.txHistory);
+                          } else {
+                            console.error('updateTxHistory not executed');
+                          }
+                        });
                       }
                       resolve();
                     });
