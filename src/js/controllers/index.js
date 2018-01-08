@@ -1188,11 +1188,18 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
           }, 100);
         };
 
-        self.updateHistory = function () {
+        self.updateHistory = function (cb) {
           const fc = profileService.focusedClient;
           const walletId = fc.credentials.walletId;
 
-          if (!fc.isComplete()) return;
+          if (!fc.isComplete()) {
+            if (lodash.isFunction(cb)) {
+              try {
+                cb(false);
+              } catch (e) {console.error(e)}
+            }
+            return;
+          }
 
           $rootScope.$emit('Local/UpdateHistoryStart');
 
@@ -1209,8 +1216,13 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
                 self.txHistoryError = true;
               }
 
-              $rootScope.$emit('Local/UpdateHistoryEnd');
+               $rootScope.$emit('Local/UpdateHistoryEnd');
               $rootScope.$apply();
+              if (lodash.isFunction(cb)) {
+                try {
+                  cb(lodash.isEmpty(err));
+                } catch (e) {console.error(e)}
+              }
             });
           });
         };
@@ -1219,6 +1231,9 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
           self.updateHistory();
         }, 1000);
 
+        self.updateTxHistoryPromise = function(cb) {
+          self.updateHistory(cb);
+        };
 
         self.onClick = function () {
           console.log('== click');
