@@ -1004,11 +1004,27 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
         };
 
         this.csvHistory = function () {
+          const CSV_CONTENT_ID = '__csv_content';
+          function setCvsContent(data) {
+            const csvElement = document.getElementById(CSV_CONTENT_ID);
+            if (lodash.isEmpty(csvElement)) {
+              $log.error(`Textarea element with id=${CSV_CONTENT_ID} not exits in DOM`);
+              return;
+            }
+            csvElement.value = data;
+          }
+
           function saveFile(name, data) {
             const chooser = document.querySelector(name);
+            setCvsContent(data);
+            chooser.removeEventListener('change', () => { });
             chooser.addEventListener('change', function (evt) {
               const fs = require('fs');
-              fs.writeFile(this.value, data, (err) => {
+              const csvElement = document.getElementById(CSV_CONTENT_ID);
+              const csvContent = csvElement !== null
+                ? document.getElementById(CSV_CONTENT_ID).value
+                : `Textarea element with id=${CSV_CONTENT_ID} not exits in DOM`;
+              fs.writeFile(this.value, csvContent, (err) => {
                 if (err) {
                   $log.debug(evt, err);
                 }
@@ -1113,6 +1129,19 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
           });
         };
 
+        self.checkTransactionsAreConfirmed = function (oldHistory, newHistory) {
+          if (oldHistory && newHistory && oldHistory.length > 0) {
+            lodash.each(oldHistory, (tx) => {
+              const newTx = lodash.find(newHistory, { unit: tx.unit });
+
+              if (newTx && tx.confirmations === 0 && newTx.confirmations === 1) {
+                const confirmedMessage = 'Your transaction has been confirmed';
+
+                notification.success(gettextCatalog.getString('Success'), gettextCatalog.getString(confirmedMessage));
+              }
+            });
+          }
+        };
 
         self.updateLocalTxHistory = function (client, cb) {
           const walletId = client.credentials.walletId;
@@ -1124,6 +1153,7 @@ no-nested-ternary,no-shadow,no-plusplus,consistent-return,import/no-extraneous-d
           return client.getTxHistory(ENV.DAGCOIN_ASSET, self.shared_address, (txs) => {
             const newHistory = self.processNewTxs(txs);
             $log.debug(`Tx History synced. Total Txs: ${newHistory.length}`);
+            self.checkTransactionsAreConfirmed(self.txHistory, newHistory);
 
             if (walletId === profileService.focusedClient.credentials.walletId) {
               self.txHistory = newHistory;
